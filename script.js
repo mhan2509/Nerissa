@@ -1,75 +1,20 @@
-// ==================== CHUYỂN MÀN HÌNH ====================
-function showHome() {
-  document.getElementById('login-screen').classList.remove('active');
-  document.getElementById('home-screen').classList.add('active');
+function gotoHome() {
+  document.getElementById('login').classList.remove('active');
+  document.getElementById('home').classList.add('active');
 }
-function showVoice() {
-  document.getElementById('home-screen').classList.remove('active');
-  document.getElementById('voice-screen').classList.add('active');
+
+function gotoVoice() {
+  document.getElementById('home').classList.remove('active');
+  document.getElementById('voice').classList.add('active');
 }
-function startGroupChat() {
-  document.getElementById('voice-screen').classList.remove('active');
-  document.getElementById('chat-screen').classList.add('active');
-  isGroupMode = true;
-  socket.emit('join-group');
+
+function startGroup() {
+  // Sau này chuyển sang chat cũ + join-group
+  alert("Sắp vào Phòng chung...");
+  // window.location.href = "chat.html"; hoặc innerHTML chat cũ
 }
+
 function startOneToOne() {
-  document.getElementById('voice-screen').classList.remove('active');
-  document.getElementById('chat-screen').classList.add('active');
-  isGroupMode = false;
-  socket.emit('join-1to1');
-  startBotFallback();
-}
-
-// Ẩn 3 màn mới khi vào chat
-document.getElementById('login-screen').classList.add('active');
-// ============= CHUYỂN TRANG =============
-function initHome() {
-  document.body.classList.replace('page-home', 'page-home'); // giữ class
-}
-
-function goToVoiceMode() {
-  document.body.classList.replace('page-home', 'page-voice');
-  document.querySelector('.home-container').outerHTML = `
-    <div class="voice-container">
-      <h1>Tiếng Sóng</h1>
-      <p>Muốn nói chuyện ngay?<br>Chọn cách kết nối của bạn</p>
-      <div class="voice-options">
-        <button class="voice-btn" onclick="enterGroupChat()">
-          People Phòng chung<br>
-          <span>Tham gia phòng chat với nhiều người đang cần trò chuyện</span>
-        </button>
-        <button class="voice-btn" onclick="enterOneToOne()">
-          Person Kết nối 1:1<br>
-          <span>Tìm một người để trò chuyện riêng tư, ẩn danh 100%</span>
-        </button>
-      </div>
-      <div class="hint-box">
-        Nếu không tìm được người kết nối sau 5s,<br>bạn sẽ được chuyển sang chat với Biển
-      </div>
-      <div class="bottom-nav">…giữ nguyên bottom nav…</div>
-    </div>`;
-}
-
-// Vào Group Chat (dùng lại code cũ)
-function enterGroupChat() {
-  isGroupMode = true;
-  socket.emit('join-group');
-  showChat(); // hàm showChat() bạn đã có từ code cũ
-}
-
-// Vào 1:1 (dùng lại code cũ)
-function enterOneToOne() {
-  isGroupMode = false;
-  socket.emit('join-1to1');
-  showChat();
-  startBotFallback(); // hàm cũ của bạn
-}
-
-// Hàm showChat() – thêm vào nếu chưa có
-function showChat() {
-  document.body.innerHTML = oldChatHTML; // giữ nguyên giao diện chat cũ
-  location.reload(); // hoặc tái khởi tạo socket + chat
-  // Cách đơn giản nhất: reload lại trang để vào chat cũ
-  // Nếu bạn muốn không reload → mình sẽ viết tiếp phần giữ state
+  // Sau này chuyển sang chat cũ + join-1to1 + fallback bot
+  alert("Sắp vào Kết nối 1:1...");
 }
