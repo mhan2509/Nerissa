@@ -1,34 +1,146 @@
-/* ============= LOGIN PAGE ============= */
-.page-login { background: linear-gradient(135deg, #0ca6e9, #0987c9); }
-.login-container { width:90%; max-width:380px; text-align:center; padding:20px; }
-.wave-logo { width:80px; margin-bottom:20px; }
-.login-container h1 { font-size:2.8rem; color:white; }
-.subtitle { font-size:1.1rem; opacity:0.9; margin:20px 0 40px; }
-.input-field { width:100%; padding:16px 20px; margin:12px 0; border:none; border-radius:30px; background:rgba(255,255,255,0.25); color:white; font-size:1.1rem; }
-.input-field::placeholder { color:rgba(255,255,255,0.8); }
-.password-wrapper { position:relative; }
-.eye-icon { position:absolute; right:20px; top:50%; transform:translateY(-50%); font-size:1.4rem; cursor:pointer; }
-.btn-login { width:100%; padding:16px; margin:20px 0; background:white; color:#0987c9; border:none; border-radius:50px; font-size:1.2rem; font-weight:bold; cursor:pointer; }
-.guest-text { margin:30px 0 10px; opacity:0.9; }
-.btn-guest { background:transparent; border:2px solid rgba(255,255,255,0.5); color:white; padding:14px 30px; border-radius:50px; font-size:1.1rem; cursor:pointer; }
-.signup { margin-top:40px; }
-.link-signup { color:white; text-decoration:underline; }
+/* ============= LOGIN PAGE - ĐÃ SỬA THEO YÊU CẦU ============= */
+.page-login {
+  background: linear-gradient(135deg, #0ca6e9, #0987c9);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login-container {
+  width: 90%;
+  max-width: 380px;
+  text-align: center;
+}
+.wave-logo {
+  width: 80px;
+  margin-bottom: 30px;
+}
+.login-container h1 {
+  font-size: 3rem;
+  color: white;
+  margin-bottom: 10px;
+}
+.subtitle {
+  font-size: 1.15rem;
+  opacity: 0.95;
+  margin-bottom: 50px;
+}
+.input-field {
+  width: 100%;
+  padding: 18px 24px;
+  margin: 14px 0;
+  border: none;
+  border-radius: 30px;
+  background: rgba(255,255,255,0.25);
+  color: white;
+  font-size: 1.1rem;
+  backdrop-filter: blur(10px);
+}
+.input-field::placeholder {
+  color: rgba(255,255,255,0.8);
+}
+.btn-login {
+  width: 100%;
+  padding: 18px;
+  margin: 30px 0 40px;
+  background: white;
+  color: #0987c9;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+.btn-guest {
+  background: transparent;
+  border: 2px solid rgba(255,255,255,0.5);
+  color: white;
+  padding: 16px 32px;
+  border-radius: 50px;
+  font-size: 1.15rem;
+  cursor: pointer;
+}
+.signup {
+  margin-top: 50px;
+}
+.signup p {
+  margin-bottom: 8px;
+  opacity: 0.9;
+}
+.link-signup {
+  color: white;
+  text-decoration: underline;
+  font-weight: 500;
+}
 
-/* ============= HOME PAGE ============= */
-.page-home .home-container { height:100vh; background:linear-gradient(135deg,#0ca6e9,#0987c9); display:flex; flex-direction:column; justify-content:space-between; padding:20px; color:white; text-align:center; }
-.header { display:flex; justify-content:space-between; align-items:center; }
-.small-wave { width:40px; }
-.header h2 { font-size:1.8rem; }
-.sound-btn { background:none; border:none; font-size:1.8rem; }
-.home-subtitle { font-size:1.1rem; margin:20px 0; opacity:0.9; }
-.btn-start { width:80%; padding:18px; background:rgba(255,255,255,0.3); border:none; border-radius:50px; color:white; font-size:1.3rem; font-weight:bold; cursor:pointer; }
-.bottom-nav { display:flex; justify-content:space-around; background:rgba(255,255,255,0.15); border-radius:20px; padding:10px; }
-.bottom-nav button { background:none; border:none; color:white; font-size:1.6rem; }
-
-/* ============= VOICE MODE PAGE ============= */
-.page-voice .voice-container { height:100vh; background:linear-gradient(135deg,#0ca6e9,#0987c9); padding:20px; color:white; text-align:center; display:flex; flex-direction:column; justify-content:center; }
-.voice-container h1 { font-size:2.5rem; margin-bottom:20px; }
-.voice-options { margin:30px 0; }
-.voice-btn { width:100%; background:rgba(255,255,255,0.25); border:none; border-radius:20px; padding:20px; margin:15px 0; text-align:left; color:white; font-size:1.2rem; backdrop-filter:blur(10px); }
-.voice-btn span { font-size:0.9rem; opacity:0.8; display:block; margin-top:5px; }
-.hint-box { margin-top:40px; background:rgba(255,255,255,0.2); border-radius:15px; padding:15px; font-size:0.95rem; }
+/* ============= HOME PAGE - ĐÃ SỬA TỈ LỆ ============= */
+.page-home {
+  background: linear-gradient(135deg, #0ca6e9, #0987c9);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.home-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 30px 20px;
+  text-align: center;
+  color: white;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.small-wave {
+  width: 40px;
+}
+.header h2 {
+  font-size: 2rem;
+}
+.sound-btn {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: white;
+}
+.home-subtitle {
+  font-size: 1.15rem;
+  opacity: 0.95;
+  margin: 20px 0;
+}
+.btn-start {
+  width: 85%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background: rgba(255,255,255,0.3);
+  border: none;
+  border-radius: 50px;
+  color: white;
+  font-size: 1.4rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+.bottom-nav {
+  display: flex;
+  justify-content: space-around;
+  background: rgba(255,255,255,0.15);
+  border-radius: 25px;
+  padding: 12px 0;
+  margin-top: 20px;
+}
+.bottom-nav button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.8rem;
+  padding: 8px;
+}
+.nav-active {
+  background: rgba(255,255,255,0.3);
+  border-radius: 50%;
+  padding: 10px !important;
+}
