@@ -3,31 +3,58 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nerissa – Gửi tâm tư vào biển sâu</title>
+  <title>Nerissa</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
-  <div class="container">
+<body class="page-login">
+  <div class="login-container">
+    <img src="https://files.catbox.moe/0x1f5p.png" alt="Wave" class="wave-logo">
     <h1>Nerissa</h1>
-    <p class="slogan">Biển giữ hộ bí mật của bạn, gió mang hộ lời yêu thương.</p>
-    
-    <div id="status">Đang kết nối với biển...</div>
-    <button id="mode-switch" onclick="toggleMode()">Chuyển sang Group Chat</button>
+    <p class="subtitle">Biển giữ hộ tâm tư, gió mang đến lời yêu.</p>
 
-    <div id="chat-container" style="display:none">
-      <div id="chat-box"></div>
-      <div class="input-area">
-        <input type="text" id="user-input" placeholder="Nói gì với biển cũng được..." autocomplete="off">
-        <button onclick="sendMessage()">Gửi</button>
-      </div>
+    <input type="email" placeholder="Email" class="input-field">
+    <div class="password-wrapper">
+      <input type="password" placeholder="Mật khẩu" class="input-field">
+      <span class="eye-icon">O</span>
+    </div>
+    <button class="btn-login">Đăng nhập</button>
+
+    <p class="guest-text">Khám phá không cần đăng nhập</p>
+    <button onclick="goToHome()" class="btn-guest">Khám phá không cần đăng nhập</button>
+
+    <div class="signup">
+      <p>Chưa có tài khoản?</p>
+      <a href="#" class="link-signup">Đăng ký ngay</a>
     </div>
   </div>
 
-  <!-- Âm thanh -->
-  <audio id="welcome-voice" src="https://files.catbox.moe/9y0r0j.mp3"></audio>
-  <audio id="wave-bg" src="https://files.catbox.moe/4m5z8w.mp3" loop></audio>
+  <script>
+    function goToHome() {
+      document.body.classList.replace('page-login', 'page-home');
+      document.querySelector('.login-container').outerHTML = homeHTML;
+      initHome();
+    }
 
-  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
-  <script src="script.js"></script>
+    // HTML của màn Home (ảnh 2)
+    const homeHTML = `
+      <div class="home-container">
+        <div class="header">
+          <img src="https://files.catbox.moe/0x1f5p.png" alt="wave" class="small-wave">
+          <h2>Nerissa</h2>
+          <button class="sound-btn">Volume</button>
+        </div>
+        <p class="home-subtitle">Biển giữ hộ tâm tư, gió mang đến lời yêu.</p>
+        <button onclick="goToVoiceMode()" class="btn-start">Bắt đầu hành trình</button>
+
+        <div class="bottom-nav">
+          <button class="nav-active">Home</button>
+          <button>Biển Lặng</button>
+          <button>Đáy Sâu</button>
+          <button>Gió Biển</button>
+          <button class="nav-active">Tiếng Sóng</button>
+          <button>Bãi Cát</button>
+        </div>
+      </div>`;
+  </script>
 </body>
 </html>
