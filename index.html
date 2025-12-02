@@ -8,18 +8,16 @@
 </head>
 <body class="page-login">
   <div class="login-container">
-    <img src="https://files.catbox.moe/0x1f5p.png" alt="Wave" class="wave-logo">
+    <img src="https://files.catbox.moe/0x1f5p.png" alt="Nerissa" class="wave-logo">
+    
     <h1>Nerissa</h1>
     <p class="subtitle">Biển giữ hộ tâm tư, gió mang đến lời yêu.</p>
 
     <input type="email" placeholder="Email" class="input-field">
-    <div class="password-wrapper">
-      <input type="password" placeholder="Mật khẩu" class="input-field">
-      <span class="eye-icon">O</span>
-    </div>
+    <input type="password" placeholder="Mật khẩu" class="input-field">
+
     <button class="btn-login">Đăng nhập</button>
 
-    <p class="guest-text">Khám phá không cần đăng nhập</p>
     <button onclick="goToHome()" class="btn-guest">Khám phá không cần đăng nhập</button>
 
     <div class="signup">
@@ -35,26 +33,27 @@
       initHome();
     }
 
-    // HTML của màn Home (ảnh 2)
     const homeHTML = `
       <div class="home-container">
         <div class="header">
-          <img src="https://files.catbox.moe/0x1f5p.png" alt="wave" class="small-wave">
+          <img src="https://files.catbox.moe/0x1f5p.png" alt="Nerissa" class="small-wave">
           <h2>Nerissa</h2>
-          <button class="sound-btn">Volume</button>
+          <button class="sound-btn">🔊</button>
         </div>
         <p class="home-subtitle">Biển giữ hộ tâm tư, gió mang đến lời yêu.</p>
         <button onclick="goToVoiceMode()" class="btn-start">Bắt đầu hành trình</button>
 
         <div class="bottom-nav">
-          <button class="nav-active">Home</button>
-          <button>Biển Lặng</button>
-          <button>Đáy Sâu</button>
-          <button>Gió Biển</button>
-          <button class="nav-active">Tiếng Sóng</button>
-          <button>Bãi Cát</button>
+          <button class="nav-active">🏠</button>
+          <button>🌊</button>
+          <button>🌌</button>
+          <button>💨</button>
+          <button class="nav-active">🔊</button>
+          <button>🏖️</button>
         </div>
       </div>`;
+      
+    function initHome() {}
   </script>
 </body>
 </html>
