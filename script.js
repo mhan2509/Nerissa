@@ -1,3 +1,28 @@
+// ==================== CHUYỂN MÀN HÌNH ====================
+function showHome() {
+  document.getElementById('login-screen').classList.remove('active');
+  document.getElementById('home-screen').classList.add('active');
+}
+function showVoice() {
+  document.getElementById('home-screen').classList.remove('active');
+  document.getElementById('voice-screen').classList.add('active');
+}
+function startGroupChat() {
+  document.getElementById('voice-screen').classList.remove('active');
+  document.getElementById('chat-screen').classList.add('active');
+  isGroupMode = true;
+  socket.emit('join-group');
+}
+function startOneToOne() {
+  document.getElementById('voice-screen').classList.remove('active');
+  document.getElementById('chat-screen').classList.add('active');
+  isGroupMode = false;
+  socket.emit('join-1to1');
+  startBotFallback();
+}
+
+// Ẩn 3 màn mới khi vào chat
+document.getElementById('login-screen').classList.add('active');
 // ============= CHUYỂN TRANG =============
 function initHome() {
   document.body.classList.replace('page-home', 'page-home'); // giữ class
