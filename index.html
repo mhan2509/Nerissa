@@ -6,100 +6,123 @@
   <title>Nerissa</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body class="page-login">
-  <!-- ==================== TRANG LOGIN ==================== -->
-  <div class="login-container">
-    <img src="https://files.catbox.moe/0x1f5p.png" alt="Nerissa" class="wave-logo">
-    <h1>Nerissa</h1>
-    <p class="subtitle">Biển giữ hộ tâm tư, gió mang đến lời yêu.</p>
+<body>
 
-    <input type="email" placeholder="Email" class="input-field">
-    <input type="password" placeholder="Mật khẩu" class="input-field">
+  <!-- ==================== MÀN 1: LOGIN ==================== -->
+  <div id="login-screen" class="screen active">
+    <div class="login-container">
+      <img src="https://files.catbox.moe/0x1f5p.png" alt="wave" class="wave-logo">
+      <h1>Nerissa</h1>
+      <p class="subtitle">Biển giữ hộ tâm tư, gió mang đến lời yêu.</p>
 
-    <button class="btn-login">Đăng nhập</button>
-    <button onclick="goToHome()" class="btn-guest">Khám phá không cần đăng nhập</button>
+      <input type="email" placeholder="Email" class="input-field">
+      <input type="password" placeholder="Mật khẩu" class="input-field">
 
-    <div class="signup">
-      <p>Chưa có tài khoản?</p>
-      <a href="#" class="link-signup">Đăng ký ngay</a>
+      <button class="btn-login">Đăng nhập</button>
+      <button onclick="showHome()" class="btn-guest">Khám phá không cần đăng nhập</button>
+
+      <div class="signup">
+        <p>Chưa có tài khoản?</p>
+        <a href="#" class="link-signup">Đăng ký ngay</a>
+      </div>
     </div>
   </div>
 
-  <script>
-    // ==================== TRANG HOME ====================
-    const homeHTML = `
-      <div class="home-container">
-        <div class="header">
-          <img src="https://files.catbox.moe/0x1f5p.png" alt="Nerissa" class="small-wave">
-          <h2>Nerissa</h2>
-          <button class="sound-btn" onclick="goToVoiceMode()">Speaker</button>
+  <!-- ==================== MÀN 2: HOME ==================== -->
+  <div id="home-screen" class="screen">
+    <div class="home-wrap">
+      <header>
+        <img src="https://files.catbox.moe/0x1f5p.png" class="small-wave">
+        <h2>Nerissa</h2>
+        <button onclick="showVoice()" class="sound-btn">Speaker</button>
+      </header>
+      <p class="home-text">Biển giữ hộ tâm tư, gió mang đến lời yêu.</p>
+      <button onclick="showVoice()" class="btn-start">Bắt đầu hành trình</button>
+    </div>
+    <nav class="bottom-nav">
+      <button class="active">Home</button>
+      <button>Wave</button>
+      <button>Depth</button>
+      <button>Wind</button>
+      <button onclick="showVoice()" class="active">Speaker</button>
+      <button>Sand</button>
+    </nav>
+  </div>
+
+  <!-- ==================== MÀN 3: TIẾNG SÓNG (chuẩn 100% ảnh bạn gửi) ==================== -->
+  <div id="voice-screen" class="screen">
+    <div class="voice-wrap">
+      <header>
+        <img src="https://files.catbox.moe/0x1f5p.png" class="small-wave">
+        <h2>Nerissa</h2>
+        <button class="sound-btn">Speaker</button>
+      </header>
+
+      <div class="voice-title">
+        <span class="speaker-icon">Speaker</span> Tiếng Sóng
+      </div>
+
+      <p class="voice-lead">Muốn nói chuyện ngay?<br>Chọn cách kết nối của bạn</p>
+
+      <div class="voice-options">
+        <button onclick="startGroupChat()" class="voice-card">
+          <span class="group-icon">People</span>
+          <div>
+            <div class="title">Phòng chung</div>
+            <div class="desc">Tham gia phòng chat với nhiều người đang cần trò chuyện</div>
+          </div>
+        </button>
+
+        <button onclick="startOneToOne()" class="voice-card">
+          <span class="person-icon">Person</span>
+          <div>
+            <div class="title">Kết nối 1:1</div>
+            <div class="desc">Tìm một người để trò chuyện riêng tư, ẩn danh 100%</div>
+          </div>
+        </button>
+      </div>
+
+      <div class="voice-hint">
+        <span class="bulb">Lightbulb</span>
+        Nếu không tìm được người kết nối sau 5s,<br>
+        bạn sẽ được chuyển sang chat với Biển
+      </div>
+    </div>
+
+    <nav class="bottom-nav">
+      <button>Nerissa</button>
+      <button>Biển Lặng</button>
+      <button>Đáy Sâu</button>
+      <button>Gió Biển</button>
+      <button class="active">Tiếng Sóng</button>
+      <button>Bãi Cát</button>
+    </nav>
+  </div>
+
+  <!-- ==================== MÀN CHAT CŨ CỦA BẠN (giữ nguyên 100%) ==================== -->
+  <div id="chat-screen" class="screen">
+    <!-- Dán nguyên đoạn HTML chat cũ của bạn vào đây -->
+    <!-- (mình sẽ giúp bạn dán ở tin nhắn tiếp theo nếu cần) -->
+    <div class="container">
+      <h1>Nerissa</h1>
+      <p class="slogan">Biển giữ hộ bí mật của bạn, gió mang hộ lời yêu thương.</p>
+      <div id="status">Đang tìm một người bạn đồng hành cùng biển...</div>
+      <button id="mode-switch" onclick="toggleMode()">Chuyển sang Group Chat</button>
+
+      <div id="chat-container" style="display:none">
+        <div id="chat-box"></div>
+        <div class="input-area">
+          <input type="text" id="user-input" placeholder="Nói gì với biển cũng được..." autocomplete="off">
+          <button onclick="sendMessage()">Gửi</button>
         </div>
-        <p class="home-subtitle">Biển giữ hộ tâm tư, gió mang đến lời yêu.</p>
-        <button onclick="goToVoiceMode()" class="btn-start">Bắt đầu hành trình</button>
+      </div>
+    </div>
 
-        <div class="bottom-nav">
-          <button class="nav-active">Home</button>
-          <button>Wave</button>
-          <button>Depth</button>
-          <button>Wind</button>
-          <button onclick="goToVoiceMode()" class="nav-active">Speaker</button>
-          <button>Sand</button>
-        </div>
-      </div>`;
+    <audio id="welcome-voice" src="https://files.catbox.moe/9y0r0j.mp3"></audio>
+    <audio id="wave-bg" src="https://files.catbox.moe/4m5z8w.mp3" loop></audio>
+  </div>
 
-    // ==================== TRANG TIẾNG SÓNG (ảnh 3) ====================
-    const voiceHTML = `
-      <div class="voice-container">
-        <div class="header">
-          <img src="https://files.catbox.moe/0x1f5p.png" alt="Nerissa" class="small-wave">
-          <h2>Nerissa</h2>
-          <button class="sound-btn">Speaker</button>
-        </div>
-
-        <h1>Tiếng Sóng</h1>
-        <p>Muốn nói chuyện ngay?<br>Chọn cách kết nối của bạn</p>
-
-        <div class="voice-options">
-          <button class="voice-btn" onclick="enterGroupChat()">
-            <span class="icon">People</span> Phòng chung<br>
-            <span class="desc">Tham gia phòng chat với nhiều người đang cần trò chuyện</span>
-          </button>
-
-          <button class="voice-btn" onclick="enterOneToOne()">
-            <span class="icon">Person</span> Kết nối 1:1<br>
-            <span class="desc">Tìm một người để trò chuyện riêng tư, ẩn danh 100%</span>
-          </button>
-        </div>
-
-        <div class="hint-box">
-          <span class="icon">Lightbulb</span> Nếu không tìm được người kết nối sau 5s,<br>
-          bạn sẽ được chuyển sang chat với Biển
-        </div>
-
-        <div class="bottom-nav">
-          <button>Home</button>
-          <button>Wave</button>
-          <button>Depth</button>
-          <button>Wind</button>
-          <button class="nav-active">Speaker</button>
-          <button>Sand</button>
-        </div>
-      </div>`;
-
-    function goToHome() {
-      document.body.className = 'page-home';
-      document.body.innerHTML = homeHTML;
-    }
-
-    function goToVoiceMode() {
-      document.body.className = 'page-voice';
-      document.body.innerHTML = voiceHTML;
-      // Khởi tạo lại socket khi vào chat (sẽ thêm ở bước sau)
-    }
-
-    // Sau này sẽ thêm 2 hàm này để vào chat thật
-    function enterGroupChat() { alert("Vào Group Chat – sẽ kết nối ở bước sau!"); }
-    function enterOneToOne() { alert("Vào 1:1 – sẽ kết nối ở bước sau!"); }
-  </script>
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
