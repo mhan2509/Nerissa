@@ -9,26 +9,23 @@
 <body>
   <div class="container">
     <h1>Nerissa</h1>
-    <p class="slogan">Biển giữ hộ tâm tư, gió mang đến lời yêu.</p>
-    <div id="status">Đang tìm một người bạn đồng hành cùng biển...</div>
-
+    <p class="slogan">Biển giữ hộ bí mật của bạn, gió mang hộ lời yêu thương.</p>
+    
+    <div id="status">Đang kết nối với biển...</div>
     <button id="mode-switch" onclick="toggleMode()">Chuyển sang Group Chat</button>
 
     <div id="chat-container" style="display:none">
       <div id="chat-box"></div>
       <div class="input-area">
         <input type="text" id="user-input" placeholder="Nói gì với biển cũng được..." autocomplete="off">
-        <button id="send-btn" onclick="sendMessage()">Gửi</button>
-        <button id="mic-btn" onmousedown="startRecording()" onmouseup="stopRecording()" class="mic">Mic</button>
-        <button id="mute-btn" onclick="toggleMute()">Mute</button>
+        <button onclick="sendMessage()">Gửi</button>
       </div>
     </div>
   </div>
 
   <!-- Âm thanh -->
-  <audio id="welcome-voice" src="https://files.catbox.moe/9y0r0j.mp3"></audio>     <!-- “Nerissa ở đây lắng nghe bạn nhé” -->
-  <audio id="thankyou-voice" src="https://files.catbox.moe/9l2p3k.mp3"></audio>   <!-- “Cảm ơn bạn vì đã cho phép Nerissa…” -->
-  <audio id="wave-bg" src="https://files.catbox.moe/4m5z8w.mp3" loop></audio>     <!-- sóng biển nền -->
+  <audio id="welcome-voice" src="https://files.catbox.moe/9y0r0j.mp3"></audio>
+  <audio id="wave-bg" src="https://files.catbox.moe/4m5z8w.mp3" loop></audio>
 
   <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
   <script src="script.js"></script>
