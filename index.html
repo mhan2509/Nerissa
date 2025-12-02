@@ -30,48 +30,48 @@
     <div class="header">
       <img src="https://files.catbox.moe/0x1f5p.png" class="small-wave">
       <h2>Nerissa</h2>
-      <button onclick="switchTo(2)" class="speaker">Speaker</button>
+      <button onclick="switchTo(2)" class="speaker">🌊</button>
     </div>
     
     <p class="slogan">Biển giữ hộ tâm tư, gió mang đến lời yêu.</p>
     <button onclick="switchTo(2)" class="start-btn">Bắt đầu hành trình</button>
     
     <div class="navbar">
-      <button class="active">Home</button>
-      <button>Biển Lặng</button>
-      <button>Đáy Sâu</button>
-      <button>Gió Biển</button>
-      <button onclick="switchTo(2)" class="active">Speaker</button>
-      <button>Bãi Cát</button>
+      <button class="active">🏠</button>
+      <button>🔊</button>
+      <button>🌌</button>
+      <button>💨</button>
+      <button onclick="switchTo(2)" class="active">🌊</button>
+      <button>🏖️</button>
     </div>
   </div>
 
-  <!-- MÀN 3: TIẾNG SÓNG – ĐÚNG 100% ẢNH BẠN GỬI -->
+  <!-- MÀN 3: TIẾNG SÓNG -->
   <div class="screen voice">
     <div class="header">
       <img src="https://files.catbox.moe/0x1f5p.png" class="small-wave">
       <h2>Nerissa</h2>
-      <button class="speaker">Speaker</button>
+      <button class="speaker">🌊</button>
     </div>
 
     <div class="voice-title">
-      <span class="big-speaker">Speaker</span>
+      <span class="big-speaker">🌊</span>
       <h1>Tiếng Sóng</h1>
     </div>
 
     <p class="voice-text">Muốn nói chuyện ngay?<br>Chọn cách kết nối của bạn</p>
 
     <div class="voice-buttons">
-      <button onclick="goToChat('group')" class="voice-btn">
-        <span class="icon">People</span>
+      <button onclick="startChat('group')" class="voice-btn">
+        <span class="icon">👥</span>
         <div>
           <div>Phòng chung</div>
           <small>Tham gia phòng chat với nhiều người<br>đang cần trò chuyện</small>
         </div>
       </button>
 
-      <button onclick="goToChat('1to1')" class="voice-btn">
-        <span class="icon">Person</span>
+      <button onclick="startChat('1to1')" class="voice-btn">
+        <span class="icon">👤</span>
         <div>
           <div>Kết nối 1:1</div>
           <small>Tìm một người để trò chuyện riêng tư,<br>ẩn danh 100%</small>
@@ -80,7 +80,7 @@
     </div>
 
     <div class="hint">
-      <span class="bulb">Lightbulb</span>
+      <span class="bulb">💡</span>
       Nếu không tìm được người kết nối sau 5s,<br>bạn sẽ được chuyển sang chat với Biển
     </div>
 
@@ -93,24 +93,31 @@
       <button>Bãi Cát</button>
     </div>
   </div>
+
+  <!-- MÀN CHAT CŨ (màu xanh đậm biển sâu) -->
+  <div class="screen chat-old">
+    <div class="container">
+      <h1>Nerissa</h1>
+      <p class="slogan">Biển giữ hộ bí mật của bạn, gió mang hộ lời yêu thương.</p>
+      
+      <div id="status">Đang tìm một người bạn đồng hành cùng biển...</div>
+      <button id="mode-switch">Chuyển sang Group Chat</button>
+
+      <div id="chat-container">
+        <div id="chat-box"></div>
+        <div class="input-area">
+          <input type="text" id="user-input" placeholder="Nói gì với biển cũng được..." autocomplete="off">
+          <button onclick="sendMessage()">Gửi</button>
+        </div>
+      </div>
+    </div>
+
+    <audio id="welcome-voice" src="https://files.catbox.moe/9y0r0j.mp3" preload="auto"></audio>
+    <audio id="wave-bg" src="https://files.catbox.moe/4m5z8w.mp3" loop preload="auto"></audio>
+  </div>
 </div>
 
-<script>
-let current = 0;
-const screens = document.querySelectorAll('.screen');
-
-function switchTo(n) {
-  screens[current].classList.remove('active');
-  screens[n].classList.add('active');
-  current = n;
-}
-
-// Chuyển sang chat cũ (bạn chỉ cần thay link này thành file chat cũ của bạn)
-function goToChat(mode) {
-  localStorage.setItem('chatMode', mode); // lưu mode để chat cũ biết
-  window.location.href = 'chat.html'; // ← file chat cũ của bạn
-}
-</script>
-
+<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
