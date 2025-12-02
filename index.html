@@ -7,9 +7,9 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="page-login">
+  <!-- ==================== TRANG LOGIN ==================== -->
   <div class="login-container">
     <img src="https://files.catbox.moe/0x1f5p.png" alt="Nerissa" class="wave-logo">
-    
     <h1>Nerissa</h1>
     <p class="subtitle">Biển giữ hộ tâm tư, gió mang đến lời yêu.</p>
 
@@ -17,7 +17,6 @@
     <input type="password" placeholder="Mật khẩu" class="input-field">
 
     <button class="btn-login">Đăng nhập</button>
-
     <button onclick="goToHome()" class="btn-guest">Khám phá không cần đăng nhập</button>
 
     <div class="signup">
@@ -27,33 +26,80 @@
   </div>
 
   <script>
-    function goToHome() {
-      document.body.classList.replace('page-login', 'page-home');
-      document.querySelector('.login-container').outerHTML = homeHTML;
-      initHome();
-    }
-
+    // ==================== TRANG HOME ====================
     const homeHTML = `
       <div class="home-container">
         <div class="header">
           <img src="https://files.catbox.moe/0x1f5p.png" alt="Nerissa" class="small-wave">
           <h2>Nerissa</h2>
-          <button class="sound-btn">🔊</button>
+          <button class="sound-btn" onclick="goToVoiceMode()">Speaker</button>
         </div>
         <p class="home-subtitle">Biển giữ hộ tâm tư, gió mang đến lời yêu.</p>
         <button onclick="goToVoiceMode()" class="btn-start">Bắt đầu hành trình</button>
 
         <div class="bottom-nav">
-          <button class="nav-active">🏠</button>
-          <button>🌊</button>
-          <button>🌌</button>
-          <button>💨</button>
-          <button class="nav-active">🔊</button>
-          <button>🏖️</button>
+          <button class="nav-active">Home</button>
+          <button>Wave</button>
+          <button>Depth</button>
+          <button>Wind</button>
+          <button onclick="goToVoiceMode()" class="nav-active">Speaker</button>
+          <button>Sand</button>
         </div>
       </div>`;
-      
-    function initHome() {}
+
+    // ==================== TRANG TIẾNG SÓNG (ảnh 3) ====================
+    const voiceHTML = `
+      <div class="voice-container">
+        <div class="header">
+          <img src="https://files.catbox.moe/0x1f5p.png" alt="Nerissa" class="small-wave">
+          <h2>Nerissa</h2>
+          <button class="sound-btn">Speaker</button>
+        </div>
+
+        <h1>Tiếng Sóng</h1>
+        <p>Muốn nói chuyện ngay?<br>Chọn cách kết nối của bạn</p>
+
+        <div class="voice-options">
+          <button class="voice-btn" onclick="enterGroupChat()">
+            <span class="icon">People</span> Phòng chung<br>
+            <span class="desc">Tham gia phòng chat với nhiều người đang cần trò chuyện</span>
+          </button>
+
+          <button class="voice-btn" onclick="enterOneToOne()">
+            <span class="icon">Person</span> Kết nối 1:1<br>
+            <span class="desc">Tìm một người để trò chuyện riêng tư, ẩn danh 100%</span>
+          </button>
+        </div>
+
+        <div class="hint-box">
+          <span class="icon">Lightbulb</span> Nếu không tìm được người kết nối sau 5s,<br>
+          bạn sẽ được chuyển sang chat với Biển
+        </div>
+
+        <div class="bottom-nav">
+          <button>Home</button>
+          <button>Wave</button>
+          <button>Depth</button>
+          <button>Wind</button>
+          <button class="nav-active">Speaker</button>
+          <button>Sand</button>
+        </div>
+      </div>`;
+
+    function goToHome() {
+      document.body.className = 'page-home';
+      document.body.innerHTML = homeHTML;
+    }
+
+    function goToVoiceMode() {
+      document.body.className = 'page-voice';
+      document.body.innerHTML = voiceHTML;
+      // Khởi tạo lại socket khi vào chat (sẽ thêm ở bước sau)
+    }
+
+    // Sau này sẽ thêm 2 hàm này để vào chat thật
+    function enterGroupChat() { alert("Vào Group Chat – sẽ kết nối ở bước sau!"); }
+    function enterOneToOne() { alert("Vào 1:1 – sẽ kết nối ở bước sau!"); }
   </script>
 </body>
 </html>
