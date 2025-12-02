@@ -1,34 +1,97 @@
-// Chuyển trang
-function show(id) {
-  document.querySelector('.page.active').classList.remove('active');
-  document.getElementById(id).classList.add('active');
+const screens = document.querySelectorAll('.screen');
+let current = 0;
+
+function switchTo(n) {
+  screens[current].classList.remove('active');
+  screens[n].classList.add('active');
+  current = n;
 }
 
-// Khi bấm vào chat thật
-function goToChat(mode) {
-  // Ẩn màn tiếng sóng
-  document.getElementById('voice').classList.remove('active');
+function startChat(mode) {
+  switchTo(3); // chuyển sang màn chat-old
+  setTimeout(initChat, 300);
+}
 
-  // Load giao diện chat cũ của bạn vào #chat
-  fetch('chat.html')  // file chat cũ của bạn đổi tên thành chat.html
-    .then(r => r.text())
-    .then(html => {
-      document.getElementById('chat').innerHTML = html;
-      document.getElementById('chat').classList.add('active');
+let socket, isPaired = false, isGroupMode = false, botTimeout;
 
-      // Khởi động lại socket + bot như cũ
-      const script = document.createElement('script');
-      script.src = 'old-script.js'; // file script.js cũ của bạn đổi tên thành old-script.js
-      document.body.appendChild(script);
+function initChat() {
+  socket = io('https://nerissa-socket-v2.onrender.com');
 
-      // Gửi lệnh join
-      setTimeout(() => {
-        if (mode === 'group') {
-          socket.emit('join-group');
-        } else {
-          socket.emit('join-1to1');
-          startBotFallback();
-        }
-      }, 500);
-    });
+  const chatBox = document.getElementById('chat-box');
+  const userInput = document.getElementById('user-input');
+  const chatContainer = document.getElementById('chat-container');
+  const status = document.getElementById('status');
+  const modeSwitch = document.getElementById('mode-switch');
+  const welcomeVoice = document.getElementById('welcome-voice');
+  const waveBg = document.getElementById('wave-bg');
+
+  const replies = ["Biển nghe thấy bạn rồi… cứ khóc đi, sóng sẽ lau nước mắt hộ bạn.","Hít một hơi thật sâu cùng mình nào… tốt lắm.","Bạn không cần phải mạnh mẽ đâu. Để biển ôm bạn một lúc nhé.","Dù hôm nay có nặng đến mấy, mai mặt trời vẫn mọc. Biển hứa đấy.","Bạn giỏi lắm vì đã dám mở Nerissa. Biển tự hào về bạn.","Bạn không phải là gánh nặng của bất kỳ ai đâu.","Bạn không làm phiền mình đâu, vinh hạnh của Nerissa là được gặp bạn mà.","Bạn đã đi được một chặng đường dài lắm rồi, nghỉ một chút đi, được không?","Có những ngày chỉ cần tồn tại đã là rất dũng cảm rồi. Bạn làm được rồi đó.","Bạn không hề yếu đuối, bạn chỉ đang mệt thôi. Nghỉ một chút đi nè.","Biển sẽ giữ bí mật này thay bạn, mãi mãi."];
+
+  function addMessage(sender, text) {
+    const div = document.createElement('div');
+    div.className = sender;
+    div.textContent = text;
+    chatBox.appendChild(div);
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }
+
+  document.body.onclick = () => {
+    welcomeVoice.play().catch(() => {});
+    waveBg.volume = 0.3; waveBg.play().catch(() => {});
+  };
+
+  socket.on('connect', () => {
+    if (localStorage.getItem('lastMode') === 'group' || window.currentMode === 'group') {
+      socket.emit('join-group');
+      isGroupMode = true;
+      modeSwitch.textContent = "Chuyển sang 1:1 Chat";
+    } else {
+      socket.emit('join-1to1');
+    }
+  });
+
+  socket.on('paired', () => {
+    clearTimeout(botTimeout);
+    isPaired = true;
+    status.textContent = "Đã tìm thấy một người bạn đồng hành";
+    chatContainer.style.display = 'block';
+    addMessage('bot', 'Gió đã mang một người lạ đến với bạn… bạn muốn nói gì cũng được nha.');
+  });
+
+  socket.on('message', msg => addMessage('stranger', msg));
+  socket.on('partner-left', () => {
+    isPaired = false;
+    addMessage('bot', 'Người đó vừa rời đi… nhưng biển vẫn ở đây với bạn nè.');
+    startBotFallback();
+  });
+
+  window.toggleMode = () => {
+    isGroupMode = !isGroupMode;
+    modeSwitch.textContent = isGroupMode ? "Chuyển sang 1:1 Chat" : "Chuyển sang Group Chat";
+    localStorage.setItem('lastMode', isGroupMode ? 'group' : '1to1');
+    socket.emit(isGroupMode ? 'join-group' : 'join-1to1');
+  };
+
+  function startBotFallback() {
+    clearTimeout(botTimeout);
+    botTimeout = setTimeout(() => {
+      if (!isPaired && !isGroupMode) {
+        status.textContent = "Biển đang lắng nghe bạn";
+        chatContainer.style.display = 'block';
+        addMessage('bot', 'Biển đây… bạn muốn nói gì cũng được, mình đang lắng nghe');
+      }
+    }, 6000);
+  }
+  startBotFallback();
+
+  window.sendMessage = () => {
+    const msg = userInput.value.trim();
+    if (!msg) return;
+    addMessage('user', msg);
+    userInput.value = '';
+    if (isPaired || isGroupMode) socket.emit('message', msg);
+    else setTimeout(() => addMessage('bot', replies[Math.floor(Math.random()*replies.length)]), 1200);
+  };
+
+  userInput.addEventListener('keypress', e => { if (e.key === 'Enter') sendMessage(); });
 }
